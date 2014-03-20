@@ -21,16 +21,14 @@
     return this.each(function() {
       var self = $(this);
       if (typeof window.SVGSVGElement === "undefined" || options.testmode) {
-        if (options.background === true) {
-          var dotsvg = /.*\.svg$/;
-          for (var i = 0; i != self.length; ++i) {
+        var dotsvg = /.*\.svg$/;
+        for (var i = 0; i != self.length; ++i) {
+          if (options.background) {
+            console.log("a");
             var style = self[i].currentStyle || window.getComputedStyle(self[i], false);
             self[i].style.backgroundImage = style.backgroundImage.replace('/svg/', options.path).replace('.svg', '.png');
-          }
-        } else {
-          var dotsvg = /.*\.svg$/;
-          for (var i = 0; i != self.length; ++i) {
-            if(self[i].src.match(dotSVG)) {
+          } else {
+            if(self[i].src.match(dotsvg)) {
               self[i].src = self[i].src.replace('/svg/', options.path).replace('.svg', '.png');
             }
           }
